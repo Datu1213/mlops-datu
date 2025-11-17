@@ -1,0 +1,14 @@
+groups:
+- name: ModelDrift-Alerts
+  rules:
+  - alert: High model drift score
+    # expr: rate(model_data_drift_score[1m]) > 0.5
+    expr: model_data_drift_score > 0.5
+    # for: 1m
+    labels:
+      severity: critical
+      action: trigger_retrain_and_register_dag
+    annotations:
+      description: "Data drift score > 0.5 for 1m"
+
+ 

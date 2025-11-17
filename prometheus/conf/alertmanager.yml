@@ -1,0 +1,21 @@
+route:
+  group_by: ['alertname']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 1h
+  receiver: airflow-retrain_and_register
+  routes:
+    - match:
+        action: trigger_retrain_and_register_dag
+      receiver: airflow-retrain_and_register
+receivers:
+  - name: airflow-retrain_and_register
+    webhook_configs:
+      - url: 'http://grafana-proxy:5000/retrain_and_register_dag'
+        send_resolved: true
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'dev', 'instance']

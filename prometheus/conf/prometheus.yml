@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 15s 
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+  - job_name: "mlflow_server"
+    static_configs:
+      - targets: ["mlflow-server:5000"]
+  # Fetch Pushgateway
+  - job_name: "batch_jobs"
+    static_configs:
+      - targets: ["pushgateway:9091"] 
+
+# Use Grafana!!!!!!
+
+# alerting:
+#   alertmanagers:
+#   - static_configs:
+#     - targets:
+#       - "alertmanager:9093"
+
+# rule_files:
+#   - "alerts.yml"
