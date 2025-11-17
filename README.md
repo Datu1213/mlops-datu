@@ -63,6 +63,9 @@ mlops-datu/
 │   ├── kafka_to_delta.ipynb
 │   ├── mlflow.ipynb
 │   └── retrain_and_register.py
+├── kubernetes
+├── infrastructure
+├── kubernetes
 └── src
     ├── consumer
     │   └── consumer.py
