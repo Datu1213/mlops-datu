@@ -338,7 +338,7 @@ services:
         condition: service_completed_successfully
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.4.0 # Zookeeper镜像
+    image: confluentinc/cp-zookeeper:7.4.0
     environment:
       SDDS: SD
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -347,12 +347,12 @@ services:
       - "21810:2181"
 
   kafka:
-    image: confluentinc/cp-kafka:7.4.0 # Kafka Broker镜像
+    image: confluentinc/cp-kafka:7.4.0
     depends_on:
-      - zookeeper # 必须在Zookeeper启动后启动
+      - zookeeper
     ports:
-      # - "9092:9092" # Kafka Broker对外端口
-      - "9094:9094" # 另一个监听端口（用于外部生产者、消费者代码访问）
+      # - "9092:9092" # Kafka Broker
+      - "9094:9094" # For outside producer/consumer access
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181 # 连接到Zookeeper
