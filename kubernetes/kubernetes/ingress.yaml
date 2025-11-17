@@ -1,0 +1,18 @@
+# kubernetes/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ml-api-ingress
+  namespace: ml-production
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ml-api-service # 指向我们之前创建的Service
+            port:
+              number: 80 # 指向Service的端口
+              

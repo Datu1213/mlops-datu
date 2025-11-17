@@ -1,0 +1,19 @@
+# kubernetes/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: ml-api-service
+  namespace: ml-production
+spec:
+  # ClusterIP是默认类型，只在集群内部暴露服务
+  type: ClusterIP 
+  
+  # 这个selector必须和Deployment中Pod的labels匹配
+  selector:
+    app: ml-api
+    
+  ports:
+    - protocol: TCP
+      port: 80 # Service自身的端口
+      targetPort: 8000 # 容器正在监听的端口
+      

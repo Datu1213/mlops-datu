@@ -1,0 +1,23 @@
+# kubernetes/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-api-deployment
+  namespace: ml-production # 我们将把它部署到这个命名空间
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ml-api
+  template:
+    metadata:
+      labels:
+        app: ml-api
+    spec:
+      containers:
+      - name: ml-api-container
+        image: ml-api-v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        
